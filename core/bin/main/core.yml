@@ -1,0 +1,755 @@
+# Core Moonlit Earth Settings
+#
+# (*) Option requires server restart
+
+# /!\ DO NOT MODIFY VERSION /!\
+version: 0.0.0
+
+# (*) Language file selection, must match a file name in the /lang folder (e.g. english for lang/english.yml)
+language: english
+
+# //// CORE Configuration \\\\
+core:
+  # (*) Enable debug messages for verbose console messages (true/false)
+  debug: false
+
+  # [LEGACY] (*) Primary world name for kingdoms and towns created before v0.3.0 (string)
+  world_name: world
+
+  # (*) World names where kingdoms and towns cannot exist (string list, use [] to disable)
+  world_blacklist:
+    - world_nether
+    - world_the_end
+
+  # (*) Reverse world_blacklist into a whitelist, where listed world names become the only worlds where kingdoms and towns can exist (true/false)
+  world_blacklist_reverse: false
+
+  # [EXPERIMENTAL] (*) World names that ignore most Earth features (string list, use [] to disable)
+  world_ignorelist: []
+
+  # [EXPERIMENTAL] (*) Track which players ignite TNT to protect specific territories against those TNT explosions (true/false)
+  enable_advanced_tnt_protection: true
+
+  # (*) Save interval in minutes, 0 to disable (integer >= 0)
+  save_interval: 60
+
+  # URL which will appear in the "/f" community link icon (string)
+  community_link: www.play-moonlit.net
+
+  # (*) Enable the usage of accomplishment prefixes applied to player names (true/false)
+  accomplishment_prefix: true
+
+  # Enable the "/f quest" command and built-in quest rewards (true/false)
+  directive_quests: true
+
+  # Reset player hearts to 20 if base value is greater than 20 on player join (true/false)
+  reset_legacy_health: false
+
+  # Minimum time in seconds between placeholder requests, use lower values for faster update rates but more lag (0 to disable, integer >= 0)
+  placeholder_request_limit: 60
+
+  # (*) Enable player nametag formatting. This may override other plugin nametag formatting (true/false)
+  player_nametag_format: true
+
+  # (*) Display the relationship of a player (friendly, enemy, etc) as a suffix of their nametag. Requires player_nametag_format to be true (true/false)
+  player_nametag_suffix_relation: true
+
+  # The number of automatic data backups to keep before deleting the oldest ones (0 to disable creating any backups, integer >= 0)
+  backup_data_amount: 10
+
+  # //// CORE.CHAT \\\\
+  chat:
+    # Text tag for all Earth plugin messages. Use '' to disable. Use & for color codes, or hex #000000. ('string')
+    tag: "§7[§aEarth§7] "
+
+    # Chat message format that appears before the divider. Use built-in tags or PAPI placeholders. Use & for color codes, or hex #000000. ('string')
+    # Built-In Earth Message Tags:
+    # %PREFIX%    Permissions group meta prefix
+    # %SUFFIX%    Permissions group meta suffix
+    # %KINGDOM%   Kingdom name
+    # %RANK%      Kingdom rank (master, officer, member)
+    # %TITLE%     Accomplishment title
+    # %NAME%      Player's name
+    # %C1%        Primary relationship color
+    # %C2%        Secondary relationship color
+    # %CW%        Kingdom webcolor
+    message: "%PREFIX% %C1%%KINGDOM% %RANK% &7| %C2%%TITLE% %C1%%NAME% %SUFFIX% "
+
+    # Text that divides the chat message format from the player's text. Use '' to disable. Use & for color codes, or hex #000000. ('string')
+    divider: "&8»&r "
+
+    # (*) Should the TITLE tag always be shown (true), or can players disable their own title (false) (true/false)
+    always_show_title: false
+
+    # Enable Earth formatting chat messages, which overrides all other plugin chat formatting (true/false)
+    enable_format: true
+
+    # Set the priority of Earth's chat message formatting. Set to high to allow other plugins to modify chat first (LOWEST, LOW, NORMAL, HIGH, HIGHEST)
+    priority: HIGH
+
+  # //// CORE.COLORS \\\\
+  colors:
+    # //// CORE.COLORS.PRIMARY \\\\
+    # These colors are used for territory bars and borders, player names and tab list displays.
+    # The following colors MUST match a ChatColor enum (e.g. GREEN).
+    # https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/ChatColor.html
+    primary:
+      # (*) The primary color that players see for their own kingdom.
+      friendly: GREEN
+
+      # (*) The primary color that players see for enemy kingdoms.
+      enemy: RED
+
+      # (*) The primary color that players see for trading kingdoms.
+      trade: LIGHT_PURPLE
+
+      # (*) The primary color that players see for peaceful kingdoms.
+      peaceful: WHITE
+
+      # (*) The primary color that players see for allied kingdoms.
+      ally: AQUA
+
+      # (*) The primary color that all players see for barbarians.
+      barbarian: YELLOW
+
+      # (*) The primary color that players see for neutral territory, like ruins and sanctuaries.
+      neutral: GRAY
+
+    # //// CORE.COLORS.SECONDARY \\\\
+    # These colors are used for other chat formats, menu labels and kingdom relationships.
+    # The following colors may use hex colors (e.g. '#FF8080'), format codes (e.g. '&b&o'), or match a ChatColor enum (e.g. DARK_GREEN).
+    # https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/ChatColor.html
+    secondary:
+      # (*) The secondary color that players see for their own kingdom.
+      friendly: "#40C010"
+
+      # (*) The secondary color that players see for enemy kingdoms.
+      enemy: "#A02020"
+
+      # (*) The secondary color that players see for trading kingdoms.
+      trade: "#9050C0"
+
+      # (*) The secondary color that players see for peaceful kingdoms.
+      peaceful: "#CCE0C8"
+
+      # (*) The secondary color that players see for allied kingdoms.
+      ally: "#22B090"
+
+      # (*) The secondary color that all players see for barbarians.
+      barbarian: "#F0C000"
+
+      # (*) The secondary color that players see for neutral territory, like ruins and sanctuaries.
+      neutral: "#A08890"
+
+  # //// CORE.DATABASE \\\\
+  database:
+    # Database connection type (sqlite, mysql)
+    connection: sqlite
+
+    # //// CORE.DATABASE.MYSQL \\\\
+    mysql:
+      # MySQL database hostname
+      hostname: localhost
+
+      # MySQL database port number
+      port: 3306
+
+      # MySQL database name
+      database: example_database
+
+      # MySQL database username
+      username: example_user
+
+      # MySQL database password
+      password: example_password
+
+      # MySQL connection properties as a string list (e.g. ["autoReconnect=true","useSSL=false"])
+      properties: ["autoReconnect=true", "useSSL=false"]
+
+  # //// CORE.INTEGRATION \\\\
+  integration:
+    # (*) Enable plugin integration with ChestShop (true/false)
+    chestshop: true
+
+    # (*) Enable plugin integration with QuickShop (true/false)
+    quickshop: true
+
+    # (*) Enable plugin integration with LuckPerms (true/false)
+    luckperms: true
+
+    # (*) Enable plugin integration with Dynmap (true/false)
+    dynmap: true
+
+    # (*) Enable plugin integration with BlueMap (true/false)
+    bluemap: true
+
+    # (*) Enable plugin integration with WorldGuard (true/false)
+    worldguard: true
+
+    # //// CORE.INTEGRATION.MAP_OPTIONS \\\\
+    map_options:
+      # (*) Render kingdoms on the web-based map view (true/false)
+      enable_kingdoms: true
+
+      # (*) Render barbarian camps on the web-based map view (true/false)
+      enable_camps: true
+
+      # (*) Render sanctuaries on the web-based map view (true/false)
+      enable_sanctuaries: true
+
+      # (*) Render ruins on the web-based map view (true/false)
+      enable_ruins: true
+
+    # (*) Enable plugin integration with DiscordSRV (true/false)
+    discordsrv: true
+
+    # //// CORE.INTEGRATION.DISCORDSRV_OPTIONS \\\\
+    discordsrv_options:
+      # Send a direct message in Discord to all kingdom members, online and offline, when a critical block is broken in a town monument (true/false)
+      raid_alert_direct: false
+
+      # Send a message to the linked kingdom channel in Discord when a critical block is broken in a town monument (true/false)
+      raid_alert_channel: true
+
+    # (*) Enable plugin integration with EssentialsX (true/false)
+    essentialsx: true
+
+    # //// CORE.INTEGRATION.ESSENTIALSX_OPTIONS \\\\
+    essentialsx_options:
+      # Allow players to create home locations in the wild as well as friendly territory (true/false)
+      enable_wild_homes: true
+
+      # Prevent players from teleporting in enemy territory and during combat (true/false)
+      enable_teleport_protection: true
+
+      # Allow players to receive kingdom payments while marked as AFK by EssentialsX (true/false)
+      enable_afk_payments: true
+
+  # //// CORE.TRAVEL \\\\
+  travel:
+    # //// CORE.TRAVEL.ENABLE \\\\
+    enable:
+      # Allow players to travel to sanctuaries with the travel command (true/false)
+      sanctuary: true
+
+      # Allow players to travel to towns with the travel command (true/false)
+      towns: true
+
+      # Allow players to travel to their capital with the travel command (true/false)
+      capital: true
+
+      # Allow players to travel to their bed home with the travel command (true/false)
+      home: true
+
+      # Allow players to travel to their barbarian camp with the travel command (true/false)
+      camp: true
+
+      # Allow players to travel to the wild with the travel command (true/false)
+      wild: true
+
+    # The radius in blocks to choose a random wild location (integer >= 0)
+    wild_radius: 1000
+
+    # The center X coordinate to choose a random wild location (any integer)
+    wild_center_x: 0
+
+    # The center Z coordinate to choose a random wild location (any integer)
+    wild_center_z: 0
+
+    # The number of seconds a player must wait from using the travel command to being teleported (integer >= 0)
+    warmup: 3
+
+    # Whether to cancel a travel warmup if the player moves to another block (true/false)
+    cancel_on_move: true
+
+    # Whether to cancel a travel warmup if the player takes any damage (true/false)
+    cancel_on_damage: true
+
+  # //// CORE.KINGDOMS \\\\
+  kingdoms:
+    # (*) Suffix to be appended to Kingdom names which will be the name of the Capital city (string)
+    capital_suffix: Capital
+
+    # (*) Whether to change the capital suffix into a prefix for Capital cities (true/false)
+    capital_prefix_swap: false
+
+    # Force players to respawn at their kingdom capital (true/false)
+    capital_respawn: true
+
+    # Capitals will be immune from capture while there are this many other towns in the kingdom (0 to disable, integer >= 0)
+    capital_immunity_towns: 2
+
+    # Declaring war on a kingdom will also declare war on their allies (true), else only the target kingdom will be at war (false) (true/false)
+    ally_defense_pact: true
+
+    # Allow players in allied kingdoms to build in each other's towns, when the Allied Building town option is true (true/false)
+    ally_build: true
+
+    # Any kingdom can start a war with another (true), else both kingdoms must agree to war (false) (true/false)
+    instant_war: true
+
+    # Either kingdom can end a war with the enemy kingdom (true), else both kingdoms must agree to peace (false) (true/false)
+    instant_peace: false
+
+    # Allow players to pvp with other kingdoms that are peaceful (true/false)
+    allow_peaceful_pvp: false
+
+    # Allow players to pvp with all other players, including friendly kingdom members, regardless of kingdom relations (true/false)
+    allow_all_pvp: false
+
+    # Only allow admins to create new kingdoms (true), else players can create their own kingdoms (false) (true/false)
+    create_admin_only: false
+
+    # Only allow admins to change the colors of kingdoms on web maps like Dynmap (true), else all kingdom masters can set the web color of their own kingdoms (false) (true/false)
+    web_color_admin_only: true
+
+    # Prevent players in other kingdoms using containers in claimed land (true/false)
+    protect_containers_use: true
+
+    # Prevent players in other kingdoms breaking containers in claimed land (true/false)
+    protect_containers_break: true
+
+    # Prevent containers from exploding in claimed land (true/false)
+    protect_containers_explode: true
+
+    # Prevent enemy players from traveling within Kingdom territory (true/false)
+    no_enemy_travel: true
+
+    # Prevent enemy players from breaking any blocks in a Kingdom with no players online (true/false)
+    no_enemy_edit_offline: true
+
+    # Time in seconds when a Kingdom or Town is protected from when the minimum player disconnects (integer >= 0)
+    no_enemy_edit_offline_warmup: 300
+
+    # Number of online players required for a Kingdom to be protected from enemy attacks (integer >= 0)
+    no_enemy_edit_offline_minimum: 2
+
+    # Prevent enemy players from throwing ender pearls into kingdom territory (true/false)
+    no_enemy_ender_pearl: false
+
+    # Prevent players in offline-protected kingdoms from attacking other enemy kingdoms (true/false)
+    no_protected_attacking: false
+
+    # Percentage boost EXP gain for the smallest kingdom (0 to disable, 0 - 100)
+    smallest_exp_boost_percent: 25
+
+    # Time in days a player must be offline to be inactive, and removed from towns and camps (0 to disable, integer >= 0)
+    offline_timeout_days: 0
+
+    # Remove inactive players from their kingdoms and exile them as barbarians (true/false)
+    offline_timeout_exile: false
+
+    # Force iron golems to attack enemy players (true/false)
+    golem_attack_enemies: true
+
+    # Allow players to attack iron golems inside of friendly towns (true/false)
+    attack_friendly_golems: false
+
+    # Kingdoms cannot have more than this number of members (0 to disable, integer >= 0)
+    max_player_limit: 0
+
+    # Kingdoms with this many players more than other Kingdoms will not accept new players (0 to disable, integer >= 0)
+    max_player_diff: 0
+
+    # The maximum number of towns, including the capital, that a Kingdom can settle (0 to disable, integer >= 0)
+    max_town_limit: 0
+
+    # Whether the maximum town limit applies only in each world (true) or across all worlds (false) (true/false)
+    max_town_limit_per_world: false
+
+    # Allow barbarians to join any kingdom, even when exiled (true) or prevent exiled barbarians from switching kingdoms (false) (true/false)
+    allow_exile_switch: true
+
+    # Time in seconds that players must wait before using the exile command repeatedly (integer >= 0)
+    exile_cooldown: 300
+
+    # Time in seconds that players must wait before using the join command repeatedly (integer >= 0)
+    join_cooldown: 300
+
+    # When true, players must have a permission "Earth.join.<kingdom>" to join specific kingdoms, e.g. "Earth.join.rome" to join the kingdom Rome (true/false)
+    per_kingdom_join_permissions: false
+
+    # Allow player damage in the wild (true/false)
+    wild_pvp: true
+
+    # Allow players to interact with blocks and containers in the wild (true/false)
+    wild_use: true
+
+    # Allow players to build in the wild (true/false)
+    wild_build: true
+
+  # //// CORE.TOWNS \\\\
+  towns:
+    # Allow kingdom masters to remove any town in their kingdom, destroying all land claims (true/false)
+    allow_destroy_master: true
+
+    # Allow town lords to remove their towns, destroying all land claims (true/false)
+    allow_destroy_lord: true
+
+    # Allow town lords to unclaim town land (true/false)
+    allow_unclaim: true
+
+    # Allow players to use the claim radius sub-command (true/false)
+    allow_claim_radius: true
+
+    # Allow players to use the claim auto sub-command (true/false)
+    allow_claim_auto: true
+
+    # Minimum height level for new town settlements (0 to disable, 0 - 256)
+    min_settle_height: 2
+
+    # Maximum height level for new town settlements (0 to disable, 0 - 256)
+    # Note, if max_settle_height is less than min_settle_height, things might break!
+    max_settle_height: 200
+
+    # Minimum distance in chunks between Towns and other Towns (0 to disable, integer >= 0)
+    min_distance_town: 16
+
+    # Minimum distance in chunks between Towns and Sanctuaries (0 to disable, integer >= 0)
+    min_distance_sanctuary: 16
+
+    # Maximum distance in chunks between Towns and all other territory (0 to disable, integer >= 0)
+    max_distance_all: 99
+
+    # Maximum distance in chunks between land claims and the town center monument, must be greater than init_radius (0 to disable, integer >= 0)
+    max_size: 16
+
+    # Towns cannot have more than this number of residents (0 to disable, integer >= 0)
+    max_resident_limit: 0
+
+    # Depth below the monument base in blocks to check for excess water and air when settling a new town (0 to disable, integer >= 0)
+    settle_checks_depth: 32
+
+    # Maximum height difference in blocks in the chunks of new town settlements (-1 to disable, integer >= 0)
+    settle_check_flatness: 4
+
+    # Whether new towns can only be created by the kingdom master and officers (true) or by all kingdom members (false) (true/false)
+    settle_officer_only: false
+
+    # Whether the cost to settle new towns increments based on all kingdom towns (true) or only the towns where each player is a lord (false) (true/false)
+    settle_increment_kingdom: false
+
+    # Radius of initial settlements. Initial chunk area will be (2r-1)^2 chunks squared (integer >= 1)
+    init_radius: 2
+
+    # Allow town upgrades to remain when the town is captured (true/false)
+    capture_upgrades: true
+
+    # Time in seconds before a town can be captured again (integer >= 0)
+    capture_cooldown: 600
+
+    # Time in seconds between raid alerts for Towns (integer >= 0)
+    raid_alert_cooldown: 60
+
+    # Time in seconds for travel cool-down (integer >= 0)
+    travel_cooldown: 120
+
+    # Enable town upgrades and the upgrade GUI menu (true/false)
+    enable_upgrades: true
+
+    # Enable town armor, which prevents a limited number of enemy block edits, in the shield GUI menu (true/false)
+    enable_armor: true
+
+    # Enable town shields, which prevent all enemy attacks, in the shield GUI menu (true/false)
+    enable_shields: true
+
+    # The number of armor points that each block destroyed by TNT removes from the town's armor (integer >= 0)
+    armor_tnt_damage: 10
+
+    # Allow upgrades to be purchased while a town is under attack (true/false)
+    upgrade_while_attacked: false
+
+    # Allow shields to be charged while a town is under attack (true/false)
+    shields_while_attacked: false
+
+    # Allow armor to be applied while a town is under attack (true/false)
+    armor_while_attacked: false
+
+    # Allow new shields to add onto existing shields when true, else require shields to deplete before charging again (true/false)
+    shields_add: true
+
+    # Allow new armor to add onto existing armor when true, else require armor to deplete before applying again (true/false)
+    armor_add: true
+
+    # Maximum shield duration in seconds that a town can have (0 to disable, integer >= 0)
+    max_shields: 86400
+
+    # Maximum armor amount in blocks that a town can have (0 to disable, integer >= 0)
+    max_armor: 1000
+
+    # Free shield duration in seconds for all newly settled towns (0 to disable, integer >= 0)
+    shield_new_towns: 3600
+
+    # Allow barbarian players to destroy towns when true, else prevent barbarians from attacking town monuments (true/false)
+    barbarians_destroy: true
+
+    # Apply the Glowing effect to enemies that break blocks within a town (true/false)
+    enemy_glow: true
+
+    # Enable the armor blacklist, which excludes certain blocks from counting against town armor (true/false)
+    armor_blacklist_enable: true
+
+    # Change the blacklist into a whitelist (true/false)
+    armor_blacklist_reverse: false
+
+    # List of block materials in the armor blacklist (Material, https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html)
+    armor_blacklist:
+      - ACACIA_LEAVES
+      - AZALEA_LEAVES
+      - BIRCH_LEAVES
+      - DARK_OAK_LEAVES
+      - FLOWERING_AZALEA_LEAVES
+      - JUNGLE_LEAVES
+      - OAK_LEAVES
+      - SPRUCE_LEAVES
+      - SNOW
+
+    # Enable villager trade discounts based on town specialization professions (true/false)
+    discount_enable: true
+
+    # Percentage between 0 and 100 of item amount to discount from villager trades (0 to disable, 0 <= integer <= 100)
+    discount_percent: 50
+
+    # Allow normal per-player villager discounts to add to town specialization discounts (true/false)
+    discount_stack: true
+
+  # //// CORE.PLOTS \\\\
+  plots:
+    # (*) Enable town plots (true/false)
+    enable: true
+
+    # Maximum plot size in chunks (0 to disable, integer >= 0)
+    max_size: 16
+
+    # Allow all town residents to build in any town plot (true/false)
+    allow_build: false
+
+    # Allow all town residents to access containers in any town plot (true/false)
+    allow_containers: false
+
+    # Allow town knights to ignore plot protections (true/false)
+    ignore_knights: true
+
+  # //// CORE.EXILE \\\\
+  exile:
+    # Set a player's currency balance to 0 when exiled (true/flase)
+    remove_favor: false
+
+    # Remove all stats and accomplishment prefixes from a player when exiled (true/false)
+    remove_stats: false
+
+    # Teleport a player to a random location in the wild of their current world upon exile (true/false)
+    teleport_wild: true
+
+    # Teleport a player to the world spawn of their current world upon exile, teleport_wild must be false (true/false)
+    teleport_world_spawn: false
+
+  # //// CORE.CAMPS \\\\
+  camps:
+    # Allow barbarian players to create a camp from placed beds (true/false)
+    enable: true
+
+    # Radius of camps for barbarians. Initial chunk area will be (2r-1)^2 chunks squared (integer >= 0)
+    init_radius: 2
+
+    # Prevent players, except for camp owner, from using or breaking containers in camp land (true/false)
+    protect_containers: true
+
+    # Prevent enemy players from breaking any blocks in camps when owners are offline (true/false)
+    no_enemy_edit_offline: true
+
+    # Time in seconds when a camp is protected from when the owner disconnects (integer >= 0)
+    no_enemy_edit_offline_warmup: 120
+
+    # Prevent enemy players from traveling within camps (true/false)
+    no_enemy_travel: true
+
+    # [EXPERIMENTAL] (*) Enable camp clans when barbarian camps are placed next to each other (true/false)
+    clan_enable: false
+
+    # [EXPERIMENTAL] Allow barbarians to access containers in camps from the same clan, CAN BE ABUSED! (true/false)
+    clan_allow_containers: false
+
+    # [EXPERIMENTAL] Allow barbarians to edit blocks in offline-protected camps from the same clan, CAN BE ABUSED! (true/false)
+    clan_allow_edit_offline: false
+
+    # [EXPERIMENTAL] Allow barbarians to join a clan with their camp while all other clan members are offline (true/false)
+    clan_allow_join_offline: false
+
+    # Apply the Glowing effect to enemies that break blocks within a camp (true/false)
+    enemy_glow: true
+
+  # //// CORE.MONUMENTS \\\\
+  monuments:
+    # (*) Blocks which must be destroyed to capture a town monument (Material, https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html, e.g. for obsidian, enum is OBSIDIAN)
+    critical_block: OBSIDIAN
+
+    # Amount of each destroy_blocks that must be destroyed to capture a town monument (integer >= 0)
+    destroy_amount: 12
+
+    # The time in seconds it takes a damaged monument to regenerate after being attacked (integer >= 0)
+    damage_regen: 300
+
+    # Time in seconds between monument loot refresh (integer >= 0)
+    loot_refresh: 1200
+
+    # Number of loot items to appear in monument loot chests (integer >= 0)
+    loot_count: 1
+
+  # //// CORE.RUINS \\\\
+  ruins:
+    # (*) Blocks which must be destroyed to capture a ruin (Material, https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html, e.g. for obsidian, enum is OBSIDIAN)
+    critical_block: OBSIDIAN
+
+    # Time in seconds between ruin captures (integer >= 0)
+    capture_cooldown: 3600
+
+    # Time in seconds for ruin golems to respawn (integer >= 0)
+    respawn_cooldown: 60
+
+    # Amount of Favor rewarded to players upon ruin capture (integer >= 0)
+    capture_reward_favor: 100
+
+    # Amount of experience rewarded to players upon ruin capture (integer >= 0)
+    capture_reward_exp: 1000
+
+    # Prevent ruin golems from dropping items upon death (true/false)
+    no_golem_drops: true
+
+    # Number of loot items to appear in ruin loot chests (integer >= 0)
+    loot_count: 2
+
+    # Only fill loot chests after the ruin has been captured during capture cooldown period (true/false)
+    loot_after_capture: true
+
+  # //// CORE.FAVOR \\\\
+  favor:
+    # Cost to use the spy command (decimal >= 0)
+    cost_spy: 75
+
+    # Cost to claim land (decimal >= 0)
+    cost_claim: 10
+
+    # Cost to travel (decimal >= 0)
+    cost_travel: 1
+
+    # Additional cost to travel per-chunk (decimal >= 0)
+    cost_travel_per_chunk: 0.01
+
+    # Cost to travel between worlds (decimal >= 0)
+    cost_travel_world: 5
+
+    # Cost to travel to a barbarian camp (decimal >= 0)
+    cost_travel_camp: 5
+
+    # Allow players to travel even when they can't pay the cost (true/false)
+    allow_travel_always: true
+
+    # //// CORE.FAVOR.TOWNS \\\\
+    towns:
+      # Cost to settle a new town (decimal >= 0)
+      cost_settle: 100
+
+      # Additional cost for each town settled (decimal >= 0)
+      cost_settle_increment: 50
+
+      # Cost to rename a town (decimal >= 0)
+      cost_rename: 50
+
+      # Cost to change the specialization profession of a town (decimal >= 0)
+      cost_specialize: 200
+
+    # //// CORE.FAVOR.KINGDOMS \\\\
+    kingdoms:
+      # Cost to create a new kingdom (decimal >= 0)
+      cost_create: 100
+
+      # Cost to rename a kingdom (decimal >= 0)
+      cost_rename: 50
+
+      # Cost to change the monument template of a kingdom (decimal >= 0)
+      cost_template: 200
+
+      # Time in seconds between payments (0 to disable, integer >= 0)
+      pay_interval_seconds: 1800
+
+      # Amount of Favor per land chunk of towns in a kingdom, to include in payments (decimal number >= 0)
+      pay_per_chunk: 0.20
+
+      # Amount of Favor per population of towns in a kingdom, to include in payments (decimal number >= 0)
+      pay_per_resident: 0.10
+
+      # The maximum amount of Favor a player can receive from a payment (0 to disable, integer >= 0)
+      pay_limit: 100
+
+      # Percentage between 0 and 100 of normal payment to pay kingdom officers as a bonus (0 to disable, 0 <= integer <= 100)
+      bonus_officer_percent: 20
+
+      # Percentage between 0 and 100 of normal payment to pay the kingdom master as a bonus (0 to disable, 0 <= integer <= 100)
+      bonus_master_percent: 50
+
+    # //// CORE.FAVOR.DIPLOMACY \\\\
+    diplomacy:
+      # Cost to declare war on another kingdom (decimal >= 0)
+      cost_war: 50
+
+      # Cost to make peace with another kingdom (decimal >= 0)
+      cost_peace: 0
+
+      # Cost to trade with another kingdom (decimal >= 0)
+      cost_trade: 50
+
+      # Cost to make an alliance with another kingdom (decimal >= 0)
+      cost_alliance: 100
+
+    # //// CORE.FAVOR.REWARDS \\\\
+    rewards:
+      # Quest reward for creating a kingdom, requires Earth.directive.kingdom permission (integer >= 0)
+      create_kingdom: 50
+
+      # Quest reward for settling a town, requires Earth.directive.settle permission (integer >= 0)
+      settle_town: 50
+
+      # Quest reward for claiming land, requires Earth.directive.claim permission (integer >= 0)
+      claim_land: 50
+
+      # Quest reward for building in a town, requires Earth.directive.build permission (integer >= 0)
+      build_town: 100
+
+      # Quest reward for creating an iron golem in a friendly town, requires Earth.directive.golem permission (integer >= 0)
+      create_golem: 25
+
+      # Quest reward for crafting iron armor, requires Earth.directive.armor permission (integer >= 0)
+      craft_armor: 25
+
+      # Quest reward for enchanting an item, requires Earth.directive.enchant permission (integer >= 0)
+      enchant_item: 25
+
+      # Quest reward for attacking an enemy town, requires Earth.directive.attack permission (integer >= 0)
+      attack_town: 100
+
+      # Quest reward for capturing an enemy town, requires Earth.directive.capture permission (integer >= 0)
+      capture_town: 100
+
+      # Quest reward for killing an enemy, requires Earth.directive.kill permission (integer >= 0)
+      kill_enemy: 50
+
+      # Reward for defending a town from attack, does not require any permission (integer >= 0)
+      defend_raid: 50
+
+  # //// CORE.COMBAT \\\\
+  combat:
+    # The combat tag label used in placeholders (String)
+    placeholder_tag: "&6[In Combat] "
+
+    # Enable combat tagging when damaged by an enemy (true/false)
+    prevent_command_on_damage: true
+
+    # Time in seconds for combat tag cooldown (integer >= 0)
+    enemy_damage_cooldown_seconds: 30
+
+    # List of commands to prevent while combat tagged, each command belongs on its own line, e.g. - home (string list)
+    prevent_command_list:
+      - k travel
+      - k settle
+      - k claim

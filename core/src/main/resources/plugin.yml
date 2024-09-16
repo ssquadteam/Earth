@@ -1,0 +1,342 @@
+name: Earth
+description: Moonlit Network Earth Core. Forked from Earth.
+author: cxv7, squadsteam
+version: 0.0.1
+api-version: 1.16
+load: POSTWORLD
+main: com.github.ssquadteam.earth.EarthPlugin
+libraries:
+  - org.apache.commons:commons-lang3:3.14.0
+depend: [Vault]
+softdepend:
+  - ProtocolLib
+  - ChestShop
+  - QuickShop
+  - LuckPerms
+  - PlaceholderAPI
+  - dynmap
+  - BlueMap
+  - EconomyPlus
+  - Economy
+  - XConomy
+  - Essentials
+  - Multiverse-Core
+  - Multiverse-Inventories
+  - Multiverse-Portals
+  - Multiverse-NetherPortals
+  - DiscordSRV
+  - WorldEdit
+  - WorldGuard
+loadbefore:
+  - SmoothTimber
+commands:
+  earth:
+    description: Base command, displays help menu
+    aliases: f
+    permission: earth.command
+    permission-message: You do not have the base command permission "earth.command".
+    usage: "/<command> [sub-command] [arguments]"
+
+permissions:
+  earth.*:
+    description: Gives access to all Earth permissions
+    default: op
+    children:
+      earth.command: true
+      earth.command.*: true
+      earth.create.*: true
+      earth.admin.*: true
+      earth.directive.*: true
+      earth.compass: true
+      earth.join: true
+      earth.chatcolor: true
+
+  earth.command:
+    description: Base command permission
+    default: true
+
+  earth.command.*:
+    description: Gives access to all Earth commands
+    default: op
+    children:
+      earth.command.help: true
+      earth.command.info: true
+      earth.command.chat: true
+      earth.command.claim: true
+      earth.command.unclaim: true
+      earth.command.list: true
+      earth.command.map: true
+      earth.command.settle: true
+      earth.command.travel: true
+      earth.command.favor: true
+      earth.command.quest: true
+      earth.command.score: true
+      earth.command.spy: true
+      earth.command.stats: true
+      earth.command.prefix: true
+      earth.command.kingdom: true
+      earth.command.town: true
+      earth.command.fly: true
+      earth.command.border: true
+
+  earth.command.help:
+    description: Display help in chat
+    default: true
+
+  earth.command.info:
+    description: Display info on a kingdom, town or player
+    default: true
+
+  earth.command.chat:
+    description: Toggle between global and kingdom-only chat
+    default: true
+
+  earth.command.claim:
+    description: Claim land for an adjacent town
+    default: true
+
+  earth.command.unclaim:
+    description: Unclaim land for a town
+    default: true
+
+  earth.command.list:
+    description: Display a list of kingdoms or towns
+    default: true
+
+  earth.command.map:
+    description: Display a map of surrounding land in chat
+    default: true
+
+  earth.command.settle:
+    description: Settle a new town
+    default: true
+
+  earth.command.travel:
+    description: Travel to a friendly town
+    default: true
+
+  earth.command.favor:
+    description: Display your favor and costs
+    default: true
+
+  earth.command.quest:
+    description: Display the quest book
+    default: true
+
+  earth.command.score:
+    description: Display a kingdom's score
+    default: true
+
+  earth.command.spy:
+    description: Purchase a map centered on an enemy town
+    default: true
+
+  earth.command.stats:
+    description: Display the stats book
+    default: true
+
+  earth.command.prefix:
+    description: Choose a prefix for your name in chat
+    default: true
+
+  earth.command.kingdom:
+    description: Manage a kingdom
+    default: true
+
+  earth.command.town:
+    description: Manage a town
+    default: true
+
+  earth.command.fly:
+    description: Fly in friendly territory
+    default: op
+
+  earth.command.border:
+    description: Toggle particle borders of territories and plots
+    default: true
+
+  earth.create.*:
+    description: Gives access to creating all territories
+    default: op
+    children:
+      earth.create.camp: true
+      earth.create.town: true
+      earth.create.kingdom: true
+
+  earth.create.camp:
+    description: Create barbarian camps
+    default: true
+
+  earth.create.town:
+    description: Create towns as a kingdom member
+    default: true
+
+  earth.create.kingdom:
+    description: Create new kingdoms
+    default: true
+
+  earth.admin.*:
+    description: All admin commands
+    default: op
+    children:
+      earth.admin.bypass: true
+      earth.admin.camp: true
+      earth.admin.capture: true
+      earth.admin.claim: true
+      earth.admin.flag: true
+      earth.admin.help: true
+      earth.admin.kingdom: true
+      earth.admin.monument: true
+      earth.admin.reload: true
+      earth.admin.ruin: true
+      earth.admin.sanctuary: true
+      earth.admin.save: true
+      earth.admin.settravel: true
+      earth.admin.stat: true
+      earth.admin.town: true
+      earth.admin.travel: true
+      earth.admin.unclaim: true
+
+  earth.admin.bypass:
+    description: Toggle admin bypass mode to ignore Earth protections
+    default: op
+
+  earth.admin.camp:
+    description: Manage player Barbarian Camp territories
+    default: op
+
+  earth.admin.capture:
+    description: Force a town to be captured by another Kingdom
+    default: op
+
+  earth.admin.claim:
+    description: Claim land chunks for the nearest territory
+    default: op
+
+  earth.admin.flag:
+    description: Set property flags for Kingdoms and territories
+    default: op
+
+  earth.admin.help:
+    description: Display the admin help message
+    default: op
+
+  earth.admin.kingdom:
+    description: Manage player and admin Kingdoms
+    default: op
+
+  earth.admin.monument:
+    description: Manage Monument Templates
+    default: op
+
+  earth.admin.reload:
+    description: Reload plugin configuration files
+    default: op
+
+  earth.admin.ruin:
+    description: Manage Ruin territories
+    default: op
+
+  earth.admin.sanctuary:
+    description: Manage Sanctuary territories
+    default: op
+
+  earth.admin.save:
+    description: Save all plugin data to files
+    default: op
+
+  earth.admin.settravel:
+    description: Set the travel spawn point for the nearest territory
+    default: op
+
+  earth.admin.stat:
+    description: Manage player stats
+    default: op
+
+  earth.admin.town:
+    description: Manage Town and Kingdom Capital territories
+    default: op
+
+  earth.admin.travel:
+    description: Teleport to any kingdom or territory
+    default: op
+
+  earth.admin.unclaim:
+    description: Return a claimed chunk of land to the Wild
+    default: op
+
+  earth.directive.*:
+    description: Gives access to all Earth directives
+    default: true
+    children:
+      earth.directive.kingdom: true
+      earth.directive.settle: true
+      earth.directive.claim: true
+      earth.directive.build: true
+      earth.directive.golem: true
+      earth.directive.armor: true
+      earth.directive.enchant: true
+      earth.directive.attack: true
+      earth.directive.capture: true
+      earth.directive.kill: true
+
+  earth.directive.kingdom:
+    description: Receive a reward for creating your first kingdom
+    default: true
+
+  earth.directive.settle:
+    description: Receive a reward for settling your first town
+    default: true
+
+  earth.directive.claim:
+    description: Receive a reward for claiming your first 5 chunks
+    default: true
+
+  earth.directive.build:
+    description: Receive a reward for building structures in a town
+    default: true
+
+  earth.directive.golem:
+    description: Receive a reward for creating an iron golem in a town
+    default: true
+
+  earth.directive.armor:
+    description: Receive a reward for crafting a set of iron armor
+    default: true
+
+  earth.directive.enchant:
+    description: Receive a reward for enchanting tools and weapons
+    default: true
+
+  earth.directive.attack:
+    description: Receive a reward for attacking an enemy town
+    default: true
+
+  earth.directive.capture:
+    description: Receive a reward for capturing an enemy town
+    default: true
+
+  earth.directive.kill:
+    description: Receive a reward for killing an enemy player
+    default: true
+
+  earth.compass:
+    description: Compass points to nearest enemy town
+    default: true
+
+  earth.join:
+    description: Join a kingdom
+    default: op
+
+  earth.discount:
+    description: Applies a percent discount on all Favor withdraws
+    default: false
+
+  earth.prefix:
+    description: Grants access to a custom prefix
+    default: false
+
+  earth.chatcolor:
+    description: Allows players to use color format codes in chat messages
+    default: false
+folia-supported: true
